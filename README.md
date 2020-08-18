@@ -15,4 +15,4 @@
 <img src="./graphics/Start_SRB.png" alt="Start_SRB">  
 
 ### References  
->>  
+<a href="https://www.gpsworld.com/what-exactly-is-gps-nmea-data/">gpsworld.com - What Exactly Is GPS NMEA Data?</a>
