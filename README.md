@@ -5,7 +5,10 @@
 > GPS  
 > NMEA Parser  
 > TCP, Client  
+> Windows.Forms GUI (C# .NET) 
  
+<img src="./graphics/map.ico" alt="map ico">  
+
 ### GPS connected succesfully  
 <img src="./graphics/Connected_1_SRB.png" alt="Connected_1_SRB">  
 <img src="./graphics/Connected_2_SRB.png" alt="Connected_2_SRB">  
