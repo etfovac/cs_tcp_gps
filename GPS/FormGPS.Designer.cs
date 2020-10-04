@@ -63,6 +63,8 @@
             this.Port = new System.Windows.Forms.NumericUpDown();
             this.IPAddress = new System.Windows.Forms.TextBox();
             this.Stream = new System.Windows.Forms.GroupBox();
+            this.IPA_label = new System.Windows.Forms.Label();
+            this.Port_label = new System.Windows.Forms.Label();
             this.GGA_WGS84.SuspendLayout();
             this.VTG.SuspendLayout();
             this.IPConfig.SuspendLayout();
@@ -274,7 +276,7 @@
             // 
             // GGA_WGS84
             // 
-            this.GGA_WGS84.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.GGA_WGS84.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.GGA_WGS84.Controls.Add(this.lbLatitude);
             this.GGA_WGS84.Controls.Add(this.lbLongitude);
             this.GGA_WGS84.Controls.Add(this.Parallel);
@@ -292,11 +294,11 @@
             this.GGA_WGS84.Controls.Add(this.NumOfSatellites);
             this.GGA_WGS84.Controls.Add(this.lbHeight);
             this.GGA_WGS84.Controls.Add(this.DateTime);
-            this.GGA_WGS84.Location = new System.Drawing.Point(5, 0);
+            this.GGA_WGS84.Location = new System.Drawing.Point(5, 5);
             this.GGA_WGS84.Margin = new System.Windows.Forms.Padding(4);
             this.GGA_WGS84.Name = "GGA_WGS84";
             this.GGA_WGS84.Padding = new System.Windows.Forms.Padding(4);
-            this.GGA_WGS84.Size = new System.Drawing.Size(413, 341);
+            this.GGA_WGS84.Size = new System.Drawing.Size(413, 326);
             this.GGA_WGS84.TabIndex = 24;
             this.GGA_WGS84.TabStop = false;
             this.GGA_WGS84.Text = "GGA message, WGS84 standard";
@@ -307,7 +309,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReceivedStream.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ReceivedStream.Location = new System.Drawing.Point(425, 0);
+            this.ReceivedStream.Location = new System.Drawing.Point(425, 2);
             this.ReceivedStream.Margin = new System.Windows.Forms.Padding(4);
             this.ReceivedStream.Name = "ReceivedStream";
             this.ReceivedStream.ReadOnly = true;
@@ -367,12 +369,12 @@
             // 
             // VTG
             // 
-            this.VTG.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.VTG.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.VTG.Controls.Add(this.COG);
             this.VTG.Controls.Add(this.lbSOG);
             this.VTG.Controls.Add(this.lbCOG);
             this.VTG.Controls.Add(this.SOG);
-            this.VTG.Location = new System.Drawing.Point(5, 346);
+            this.VTG.Location = new System.Drawing.Point(5, 335);
             this.VTG.Name = "VTG";
             this.VTG.Size = new System.Drawing.Size(413, 100);
             this.VTG.TabIndex = 31;
@@ -381,12 +383,14 @@
             // 
             // IPConfig
             // 
+            this.IPConfig.Controls.Add(this.Port_label);
+            this.IPConfig.Controls.Add(this.IPA_label);
             this.IPConfig.Controls.Add(this.Connect);
             this.IPConfig.Controls.Add(this.Port);
             this.IPConfig.Controls.Add(this.IPAddress);
             this.IPConfig.Location = new System.Drawing.Point(5, 450);
             this.IPConfig.Name = "IPConfig";
-            this.IPConfig.Size = new System.Drawing.Size(176, 116);
+            this.IPConfig.Size = new System.Drawing.Size(189, 116);
             this.IPConfig.TabIndex = 32;
             this.IPConfig.TabStop = false;
             this.IPConfig.Text = "IP Config";
@@ -395,10 +399,10 @@
             // 
             this.Connect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Connect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Connect.Location = new System.Drawing.Point(6, 81);
+            this.Connect.Location = new System.Drawing.Point(6, 83);
             this.Connect.Margin = new System.Windows.Forms.Padding(4);
             this.Connect.Name = "Connect";
-            this.Connect.Size = new System.Drawing.Size(159, 28);
+            this.Connect.Size = new System.Drawing.Size(170, 28);
             this.Connect.TabIndex = 5;
             this.Connect.Text = "Connect";
             this.Connect.UseVisualStyleBackColor = true;
@@ -406,7 +410,7 @@
             // 
             // Port
             // 
-            this.Port.Location = new System.Drawing.Point(45, 49);
+            this.Port.Location = new System.Drawing.Point(87, 44);
             this.Port.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -418,7 +422,7 @@
             0,
             0});
             this.Port.Name = "Port";
-            this.Port.Size = new System.Drawing.Size(120, 22);
+            this.Port.Size = new System.Drawing.Size(91, 22);
             this.Port.TabIndex = 4;
             this.Port.Tag = "TCP";
             this.Port.Value = new decimal(new int[] {
@@ -430,9 +434,9 @@
             // 
             // IPAddress
             // 
-            this.IPAddress.Location = new System.Drawing.Point(45, 21);
+            this.IPAddress.Location = new System.Drawing.Point(87, 18);
             this.IPAddress.Name = "IPAddress";
-            this.IPAddress.Size = new System.Drawing.Size(120, 22);
+            this.IPAddress.Size = new System.Drawing.Size(91, 22);
             this.IPAddress.TabIndex = 3;
             this.IPAddress.Text = "127.0.0.1";
             this.IPAddress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IPAddress_KeyUp);
@@ -448,10 +452,29 @@
             this.Stream.TabStop = false;
             this.Stream.Text = "Stream";
             // 
+            // IPA_label
+            // 
+            this.IPA_label.AutoSize = true;
+            this.IPA_label.Location = new System.Drawing.Point(8, 21);
+            this.IPA_label.Name = "IPA_label";
+            this.IPA_label.Size = new System.Drawing.Size(76, 17);
+            this.IPA_label.TabIndex = 6;
+            this.IPA_label.Text = "IP Address";
+            // 
+            // Port_label
+            // 
+            this.Port_label.AutoSize = true;
+            this.Port_label.Location = new System.Drawing.Point(19, 44);
+            this.Port_label.Name = "Port_label";
+            this.Port_label.Size = new System.Drawing.Size(65, 17);
+            this.Port_label.TabIndex = 7;
+            this.Port_label.Text = "TCP Port";
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(888, 568);
             this.Controls.Add(this.Stream);
             this.Controls.Add(this.IPConfig);
@@ -512,6 +535,8 @@
         private System.Windows.Forms.NumericUpDown Port;
         private System.Windows.Forms.Button Connect;
         private System.Windows.Forms.GroupBox Stream;
+        private System.Windows.Forms.Label Port_label;
+        private System.Windows.Forms.Label IPA_label;
     }
 }
 
