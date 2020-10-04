@@ -15,7 +15,7 @@
 
 ### No device found 
 <img src="./graphics/NoDevice.png" alt="NoDevice">  
-<img src="./graphics/Start_SRB.png" alt="Start_SRB">  
+<img src="./graphics/Start_SRB.png" alt="Start_ENG">  
 
 ### References  
 <a href="https://www.codeproject.com/Articles/279647/NMEA-0183-Sentence-parser-builder">codeproject.com - NMEA-0183-Sentence-parser</a>  
