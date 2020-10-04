@@ -107,7 +107,7 @@
             // lbuMSL
             // 
             this.lbuMSL.AutoSize = true;
-            this.lbuMSL.Location = new System.Drawing.Point(275, 174);
+            this.lbuMSL.Location = new System.Drawing.Point(250, 174);
             this.lbuMSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbuMSL.Name = "lbuMSL";
             this.lbuMSL.Size = new System.Drawing.Size(13, 17);
@@ -127,7 +127,7 @@
             // lbHeight
             // 
             this.lbHeight.AutoSize = true;
-            this.lbHeight.Location = new System.Drawing.Point(223, 174);
+            this.lbHeight.Location = new System.Drawing.Point(197, 174);
             this.lbHeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbHeight.Name = "lbHeight";
             this.lbHeight.Size = new System.Drawing.Size(28, 17);
