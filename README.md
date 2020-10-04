@@ -9,13 +9,17 @@
  
 <img src="./graphics/map.ico" alt="map ico">  
 
+### App on start-up  
+<img src="./graphics/Start_ENG.png" alt="Start_ENG"> 
+
 ### GPS connected succesfully 
+> Outdated images (2015, SRB)
 <img src="./graphics/Connected_1_SRB.png" alt="Connected_1_SRB">  
 <img src="./graphics/Connected_2_SRB.png" alt="Connected_2_SRB">  
 
-### No device found 
+### No device found message
 <img src="./graphics/NoDevice.png" alt="NoDevice">  
-<img src="./graphics/Start_ENG.png" alt="Start_ENG">  
+ 
 
 ### References  
 <a href="https://www.codeproject.com/Articles/279647/NMEA-0183-Sentence-parser-builder">codeproject.com - NMEA-0183-Sentence-parser</a>  
