@@ -10,7 +10,7 @@
 <img src="./graphics/map.ico" alt="map ico">  
 
 ### App on start-up  
-<img src="./graphics/Start_ENG.png" alt="Start_ENG"> 
+<img src="./graphics/Startup.png" alt="Startup"> 
 
 ### GPS connected succesfully 
 > Outdated images (2015, SRB)
