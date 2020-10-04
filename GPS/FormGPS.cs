@@ -13,83 +13,54 @@ using System.Net;
 
 namespace GPS
 {
-    
-
     public partial class FormGPS : Form
     {
-        NetworkStream streamGPS;
-        TcpClient gpstcp;
-        string poruka ="";
-        string hostUri = "10.0.0.11";
-        int portNumber = 5555;
+        private NetworkStream streamGPS;
+        private TcpClient gpstcp;
+        private string message;
+        private string IpAddress;
+        private int TcpPort;
 
         public FormGPS()
         {
             InitializeComponent();
-
-            
-            try
-            {
-                gpstcp = new TcpClient(hostUri, portNumber);
-                if (gpstcp.Connected) { streamGPS = gpstcp.GetStream(); }
-            }
-            catch (SocketException ex)
-            {
-                MessageBox.Show( "Error connecting to host: " + hostUri + ":" + portNumber.ToString() + ".\n" + ex.ToString() );
-            }
-
+            message = "";
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            timerGPS.Enabled = true;  
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            timerGPS.Enabled = false;
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (gpstcp != null && gpstcp.Connected) gpstcp.Close();
-        }
-
-        private void timerGPS_Tick(object sender, EventArgs e)
+        private void TimerGPS_Tick(object sender, EventArgs e)
         {
             if (streamGPS != null && streamGPS.CanRead)
             {
-                byte[] bajt = { (byte)streamGPS.ReadByte() };
-                if (Encoding.ASCII.GetString(bajt) == "$")
+                byte[] ByteRd = { (byte)streamGPS.ReadByte() };
+                if (Encoding.ASCII.GetString(ByteRd) == "$")
                 {
-                    richTextBox1.AppendText(poruka);
-                    Parsiraj(sender, e);
-                    poruka = "$";
+                    ReceivedStream.AppendText(message);
+                    Parse(sender, e);
+                    message = "$";
                 }
                 else
                 {
-                    poruka += Encoding.ASCII.GetString(bajt);
-                    textBox1.Text = poruka;
+                    message += Encoding.ASCII.GetString(ByteRd);
+                    LastMessage.Text = message;
                 }
             }
         }
 
-        private void Parsiraj(object sender, EventArgs e)
+        private void Parse(object sender, EventArgs e)
         {
-            string stringToParse = poruka;
+            string stringToParse = message;
             try
-            {        // try to parse sentence
+            {
                 var parsedSentence = NMEAParser.Parse(stringToParse);
 	            if (parsedSentence is NMEAStandardSentence)
 	            {
 		            NMEAStandardSentence sentence = (parsedSentence as NMEAStandardSentence);
-                    // Prima sve poruke, a mi cemo citati one sa $GPGGA header-om:
+                    // It receives all the messages
+                    // only $GPGGA header messages are parsed here:
                     // $GPGGA,hhmmss.ss,Latitude,N,Longitude,E,FS,NoSV,HDOP,msl,m,Altref,m,DiffAge,DiffStation*cs<CR><LF>
-                	if ((sentence.TalkerID == TalkerIdentifiers.GP) && (sentence.SentenceID == SentenceIdentifiers.GGA))
+                    if ((sentence.TalkerID == TalkerIdentifiers.GP) && (sentence.SentenceID == SentenceIdentifiers.GGA))
 		            {
-                        //
-                        // Parsiranje GGA poruka ($GPGGA = Global positioning system fix data) - vidi NMEA-uBlox protocol str37.
-                        //  --pazi-- u odnosu na tabelu na str37, redovi su pomereni za -1
+                        // Parsing GGA message ($GPGGA = Global positioning system fix data) - see: NMEA-uBlox protocol table on page 47.
                         lbTime.Text = sentence.parameters[0].ToString(); // UTC Time, Current time
                         lbLatitude.Text = sentence.parameters[1].ToString(); // Latitude, Degrees + minutes
                         lbNorthing.Text = sentence.parameters[2].ToString(); // N/S Indicator, N=north or S=south
@@ -98,39 +69,68 @@ namespace GPS
                         lbFix.Text = sentence.parameters[5].ToString(); // Position Fix Status Indicator
                         lbNoSV.Text = sentence.parameters[6].ToString(); // Satellites Used, Range 0 to 12
                         lbHDOP.Text = sentence.parameters[7].ToString();//  HDOP, Horizontal Dilution of Precision = uticaj geometr. konfiguracije (rasporeda) satelita na tacnost merenja
-                        lbHeight.Text = sentence.parameters[8].ToString(); // MSL Altitude = nadmorska visina [m] (ali za WGS84, sa drugom ref. tackom u odnosu na nas GK) 
-                        lbuMSL.Text = sentence.parameters[9].ToString(); // Units, Meters (fixed field) -- jedinica za MSL je uvek [m]
-
-                        // Fix Status (str38)
+                        lbHeight.Text = sentence.parameters[8].ToString(); // MSL Altitude [m] (but for WGS84; Gauss-Kruger has different ref.point) 
+                        lbuMSL.Text = sentence.parameters[9].ToString(); // Units, Meters (fixed field) - MSL unit is always [m]
+                        // Quality Indicator (page 48)
                         // 0 - No Fix / Invalid
                         // 1 - Standard GPS (2D/3D)
                         // 2 - Differential GPS
                         // 6 - Estimated (DR) Fix
-		            }
+                    }
 
-                   
-                    // Prima sve poruke, a mi cemo citati one sa $GPVTG header-om:
+                    // only $GPVTG header messages are parsed here:
                     // $GPVTG,cogt,T,cogm,M,sog,N,kph,K,mode*cs<CR><LF>
                     if ((sentence.TalkerID == TalkerIdentifiers.GP) && (sentence.SentenceID == SentenceIdentifiers.VTG))
 		                {
-                        //
-                        // Parsiranje VTG poruka ($GPVTG =  Course over ground and Ground speed) - vidi NMEA-uBlox protocol str44.
-                        //  --pazi-- u odnosu na tabelu na str44, redovi su pomereni za -1
+                        // Parsing VTG message ($GPVTG =  Course over ground and Ground speed) - see: NMEA-uBlox protocol table on page 57.
                         lbCOG.Text = sentence.parameters[0].ToString(); // Course over ground (true)
                         lbSOG.Text = sentence.parameters[6].ToString(); // Speed over ground
 
 		                }
 
-                    // $GPDTM,LLL,LSD,lat,N/S,lon,E/W,alt,RRR*cs<CR><LF>    str49
-            	    }
-	            			
-        	    }				
+                    // $GPDTM,LLL,LSD,lat,N/S,lon,E/W,alt,RRR*cs<CR><LF>    see: NMEA-uBlox protocol manual
+                }
+
+            }				
                 catch 
                 {
 	            
                 }
         }
 
-       
+        private void Start_Click(object sender, EventArgs e)
+        {
+            TimerGPS.Enabled = true;
+        }
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            TimerGPS.Enabled = false;
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (gpstcp != null && gpstcp.Connected) gpstcp.Close();
+        }
+        private void Connect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IpAddress = IPAddress.Text;
+                TcpPort = (int)Port.Value;
+                gpstcp = new TcpClient(IpAddress, TcpPort);
+                if (gpstcp.Connected) { streamGPS = gpstcp.GetStream(); }
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("Error connecting to host: " + IpAddress + ":" + TcpPort.ToString() + ".\n" + ex.ToString());
+            }
+        }
+        private void IPAddress_KeyUp(object sender, KeyEventArgs e)
+        {
+            IpAddress = IPAddress.Text;
+        }
+        private void Port_ValueChanged(object sender, EventArgs e)
+        {
+            TcpPort = (int)Port.Value;
+        }
     }
 }

@@ -61,7 +61,7 @@
     <Compile Include="NMEAParser.cs" />
     <Compile Include="NMEAProprietarySentence.cs" />
     <Compile Include="NMEASentence.cs" />
-    <Compile Include="NMEAStandartSentence.cs" />
+    <Compile Include="NMEAStandardSentence.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormGPS.resx">
