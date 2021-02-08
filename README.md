@@ -7,8 +7,12 @@
 > NMEA Parser  
 > TCP, Client  
 > Windows.Forms GUI (C# .NET) 
- 
-<img src="./graphics/map.ico" alt="map ico">  
+
+### Table of Contents (Wiki)
+[Wiki Home](https://github.com/etfovac/cs_tcp_gps/wiki)  
+[Setup](https://github.com/etfovac/cs_tcp_gps/wiki/Setup)  
+[Notes](https://github.com/etfovac/cs_tcp_gps/wiki/Notes)  
+[References](https://github.com/etfovac/cs_tcp_gps/wiki/References)  
 
 ### App on start-up  
 <img src="./graphics/Startup.png" alt="Startup"> 
@@ -20,9 +24,4 @@
 ### No device found message  
 <img src="./graphics/NoDevice.png" alt="NoDevice">  
  
-
-### Table of Contents (Wiki)
-[Wiki Home](https://github.com/etfovac/cs_tcp_gps/wiki)  
-[Setup](https://github.com/etfovac/cs_tcp_gps/wiki/Setup)  
-[Notes](https://github.com/etfovac/cs_tcp_gps/wiki/Notes)  
-[References](https://github.com/etfovac/cs_tcp_gps/wiki/References)  
+<img src="./graphics/map.ico" alt="map ico">  
