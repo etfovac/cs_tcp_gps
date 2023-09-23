@@ -19,7 +19,12 @@
 
 ### GPS connected succesfully  
 <img src="./graphics/ParseStop.png" alt="ParseStop">  
-<img src="./graphics/BufferFull.png" alt="BufferFull">  
+<img src="./graphics/BufferFull.png" alt="BufferFull">   
+
+  
+<pre>old ui
+    <img src="./graphics/gps fix, old ui.gif" alt="GPSfix,OldUI">
+</pre>  
 
 ### No device found message  
 <img src="./graphics/NoDevice.png" alt="NoDevice">  
